@@ -12,7 +12,12 @@ ANSIBLE_METADATA = {'metadata_version': '1.0',
                     'supported_by': 'community'}
 
 DOCUMENTATION = """
-
+---
+module: ibclient
+author: "Nathan Gotz"
+short_description: Manage Infoblox via Web API
+description:
+  - Manage Infoblox IPAM and DNS via Web API
 """
 
 EXAMPLES = """
