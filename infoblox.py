@@ -123,7 +123,7 @@ def main():
     net_view = module.params["net_view"]
     fields = module.params["fields"]
 
-    ib = IBClient(server, username, password, version, dns_view, net_view)
+    ib = IBClient(server, username, password, api_version, dns_view, net_view)
 
     if action == "get_memberservers":
         result = ib.get_memberservers
