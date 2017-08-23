@@ -38,6 +38,7 @@ try:
 except ImportError:
     HAS_REQUESTS = False
 
+
 def main():
     """
     Ansible module to manage Infoblox operation by using REST API
@@ -126,11 +127,12 @@ def main():
     ib = IBClient(server, username, password, api_version, dns_view, net_view)
 
     if action == "get_memberservers":
-        result = ib.get_memberservers
+        result = ib.get_memberservers()
         if result:
+            # module.exit_json(changed=False, msg=result)
             result_json = {
                 'changed': False,
-                'stdout': result
+                'msg': result
             }
         else:
             result_json = {
@@ -141,7 +143,7 @@ def main():
         if result:
             result_json = {
                 'changed': False,
-                'stdout': result
+                'msg': result
             }
         else:
             result_json = {
@@ -152,7 +154,7 @@ def main():
         if result:
             result_json = {
                 'changed': False,
-                'stdout': result
+                'msg': result
             }
         else:
             result_json = {
@@ -163,7 +165,7 @@ def main():
         if result:
             result_json = {
                 'changed': False,
-                'stdout': result
+                'msg': result
             }
         else:
             result_json = {
@@ -174,7 +176,7 @@ def main():
         if result:
             result_json = {
                 'changed': False,
-                'stdout': result
+                'msg': result
             }
         else:
             result_json = {
@@ -185,7 +187,7 @@ def main():
         if result:
             result_json = {
                 'changed': False,
-                'stdout': result
+                'msg': result
             }
         else:
             result_json = {
@@ -321,7 +323,7 @@ def main():
     #         module.exit_json(result)
     #     else:
     #         module.exit_json(msg="No member servers found")
-    module.exit_json(result_json)
+    module.exit_json(**result_json)
 
 if __name__ == "__main__":
     main()
