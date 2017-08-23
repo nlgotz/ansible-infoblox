@@ -128,39 +128,69 @@ def main():
     if action == "get_memberservers":
         result = ib.get_memberservers
         if result:
-            module.exit_json(result)
+            result_json = {
+                'changed': False,
+                'stdout': result
+            }
         else:
-            module.exit_json(msg="No member servers found")
+            result_json = {
+                'msg': "No member servers found"
+            }
     elif action == "get_dhcp_servers":
         result = ib.get_dhcp_servers()
         if result:
-            module.exit_json(result)
+            result_json = {
+                'changed': False,
+                'stdout': result
+            }
         else:
-            module.exit_json(msg="No DHCP servers found")
+            result_json = {
+                'msg': "No DHCP servers found"
+            }
     elif action == "get_dhcpfailover":
         result = ib.get_dhcpfailover()
         if result:
-            module.exit_json(result)
+            result_json = {
+                'changed': False,
+                'stdout': result
+            }
         else:
-            module.exit_json(msg="No DHCP failover found")
+            result_json = {
+                'msg': "No DHCP failover found"
+            }
     elif action == "get_network":
         result = ib.get_network(network, fields)
         if result:
-            module.exit_json(result)
+            result_json = {
+                'changed': False,
+                'stdout': result
+            }
         else:
-            module.exit_json(msg="Network %s not found" % network)
+            result_json = {
+                'msg': "Network not found"
+            }
     elif action == "get_network_by_ip":
         result = ib.get_network_by_ip(ip_address, fields)
         if result:
-            module.exit_json(result)
+            result_json = {
+                'changed': False,
+                'stdout': result
+            }
         else:
-            module.exit_json(msg="No network found for address %s" % ip_address)
+            result_json = {
+                'msg': "Network not found"
+            }
     elif action == "get_network_by_comment":
         result = ib.get_network_by_comment(comment, fields)
         if result:
-            module.exit_json(result)
+            result_json = {
+                'changed': False,
+                'stdout': result
+            }
         else:
-            module.exit_json(msg="No network found for comment %s" % comment)
+            result_json = {
+                'msg': "Network not found"
+            }
     # elif action == "get_next_available_network":
     #     if result:
     #         module.exit_json(result)
@@ -291,7 +321,7 @@ def main():
     #         module.exit_json(result)
     #     else:
     #         module.exit_json(msg="No member servers found")
-
+    module.exit_json(result_json)
 
 if __name__ == "__main__":
     main()
