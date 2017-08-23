@@ -129,7 +129,6 @@ def main():
     if action == "get_memberservers":
         result = ib.get_memberservers()
         if result:
-            # module.exit_json(changed=False, msg=result)
             result_json = {
                 'changed': False,
                 'msg': result
@@ -193,41 +192,83 @@ def main():
             result_json = {
                 'msg': "Network not found"
             }
-    # elif action == "get_next_available_network":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
-    # elif action == "get_network_container":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
-    # elif action == "get_range":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
-    # elif action == "get_dns_record":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
-    # elif action == "get_similar_dns_records":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
-    # elif action == "get_fixedaddress":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
-    # elif action == "get_fixedaddress_by_mac":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
+    elif action == "get_next_available_network":
+        result = ib.get_next_available_network(network, cidr, num)
+        if result:
+            result_json = {
+                'changed': False,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "No next available network"
+            }
+    elif action == "get_network_container":
+        result = ib.get_network_container(network, fields)
+        if result:
+            result_json = {
+                'changed': False,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "Network Container not found"
+            }
+    elif action == "get_range":
+        result = ib.get_range(start_addr, end_addr, fields)
+        if result:
+            result_json = {
+                'changed': False,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "No DHCP Range"
+            }
+    elif action == "get_dns_record":
+        result = ib.get_dns_record(type, record, fields)
+        if result:
+            result_json = {
+                'changed': False,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "No DNS Record"
+            }
+    elif action == "get_similar_dns_records":
+        result = ib.get_similar_dns_records(type, record, fields)
+        if result:
+            result_json = {
+                'changed': False,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "No Similar DNS Records"
+            }
+    elif action == "get_fixedaddress":
+        result = ib.get_fixedaddress(ip_address, fields)
+        if result:
+            result_json = {
+                'changed': False,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "Fixed Address not found"
+            }
+    elif action == "get_fixedaddress_by_mac":
+        result = ib.get_fixedaddress_by_mac(mac_address, fields)
+        if result:
+            result_json = {
+                'changed': False,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "Fixed Address not found"
+            }
     # elif action == "create_network":
     #     if result:
     #         module.exit_json(result)
