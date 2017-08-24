@@ -29,7 +29,12 @@ RETURN = """
 """
 
 from ansible.module_utils.basic import AnsibleModule
-from ibclient.ibclient import IBClient
+
+try:
+    from ibclient.ibclient import IBClient
+    HAS_IBCLIENT = True
+except ImportError:
+    HAS_IBCLIENT = False
 
 try:
     import requests
@@ -94,6 +99,11 @@ def main():
     if not HAS_REQUESTS:
         module.fail_json(
             msg="Library 'requests' is required. Use 'sudo pip install requests' to fix it.")
+
+    if not HAS_IBCLIENT:
+        # This is a lie. ibclient (Infoblox client) is not on pypi (yet)
+        module.fail_json(
+            msg="Library 'ibclient' is required. Use 'sudo pip install ibclient' to fix it.")
 
     """
     Global vars
