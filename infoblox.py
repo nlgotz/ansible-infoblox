@@ -57,7 +57,8 @@ def main():
                 "create_network_container", "create_range", "create_reservedaddress",
                 "create_fixedaddress", "create_ztp_fixedaddress", "create_a_record",
                 "create_ptr_record", "create_dns_record", "update_network",
-                "update_network_container", "update_fixedaddress_by_ip_addr",
+                "update_network_container", "update_reservedaddress",
+                "update_fixedaddress_by_ip_addr",
                 "update_fixedaddress_mac_addr", "delete_network",
                 "delete_network_container", "delete_range", "delete_fixedaddress",
                 "delete_fixedaddress_by_mac", "delete_dns_records"
@@ -369,26 +370,61 @@ def main():
             result_json = {
                 'msg': "Unable to create DNS record"
             }
-    # elif action == "update_network":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
-    # elif action == "update_network_container":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
-    # elif action == "update_fixedaddress_by_ip_addr":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
-    # elif action == "update_fixedaddress_mac_addr":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
+    elif action == "update_network":
+        result = ib.update_network(network, comment)
+        if result:
+            result_json = {
+                'changed': True,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "Unable to update network"
+            }
+    elif action == "update_network_container":
+        result = ib.update_network_container(network, comment)
+        if result:
+            result_json = {
+                'changed': True,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "Unable to update network container"
+            }
+    elif action == "update_reservedaddress":
+        result = ib.update_reservedaddress(ip_address, host)
+        if result:
+            result_json = {
+                'changed': True,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "Unable to update reserved address"
+            }
+    elif action == "update_fixedaddress_by_ip_addr":
+        result = ib.update_fixedaddress_by_ip_addr(ip_address, mac_address, host)
+        if result:
+            result_json = {
+                'changed': True,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "Unable to update fixed address"
+            }
+    elif action == "update_fixedaddress_mac_addr":
+        result = ib.update_fixedaddress_by_mac_addr(mac_address, host)
+        if result:
+            result_json = {
+                'changed': True,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "Unable to update fixed address"
+            }
     # elif action == "delete_network":
     #     if result:
     #         module.exit_json(result)
