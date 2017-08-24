@@ -269,51 +269,106 @@ def main():
             result_json = {
                 'msg': "Fixed Address not found"
             }
-    # elif action == "create_network":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
-    # elif action == "create_network_container":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
-    # elif action == "create_range":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
-    # elif action == "create_reservedaddress":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
-    # elif action == "create_fixedaddress":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
-    # elif action == "create_ztp_fixedaddress":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
-    # elif action == "create_a_record":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
-    # elif action == "create_ptr_record":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
-    # elif action == "create_dns_record":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
+    elif action == "create_network":
+        result = ib.create_network(network, comment, template)
+        if result:
+            result_json = {
+                'changed': False,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "Unable to create network"
+            }
+    elif action == "create_network_container":
+        result = ib.create_network_container(network, comment)
+        if result:
+            result_json = {
+                'changed': False,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "Unable to create network container"
+            }
+    elif action == "create_range":
+        result = ib.create_range(network, start_addr, end_addr, exc_start,
+                                 exc_end, options, template)
+        if result:
+            result_json = {
+                'changed': False,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "Unable to create DHCP range"
+            }
+    elif action == "create_reservedaddress":
+        result = ib.create_reservedaddress(ip_address, host)
+        if result:
+            result_json = {
+                'changed': False,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "Unable to create reserved address"
+            }
+    elif action == "create_fixedaddress":
+        result = ib.create_fixedaddress(ip_address, mac_address, host)
+        if result:
+            result_json = {
+                'changed': False,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "Unable to fixed address"
+            }
+    elif action == "create_ztp_fixedaddress":
+        result = ib.create_ztp_fixedaddress(ip_address, mac_addr, host, tftp_server, cfg_file, vendor_code)
+        if result:
+            result_json = {
+                'changed': False,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "Unable to fixed address"
+            }
+    elif action == "create_a_record":
+        result = ib.create_a_record(ip_address, fqdn)
+        if result:
+            result_json = {
+                'changed': False,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "Unable to create DNS A record"
+            }
+    elif action == "create_ptr_record":
+        result = ib.create_ptr_record(ip_address, fqdn)
+        if result:
+            result_json = {
+                'changed': False,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "Unable to create DNS PTR record"
+            }
+    elif action == "create_dns_record":
+        result = ib.create_dns_record(ip_address, fqdn)
+        if result:
+            result_json = {
+                'changed': False,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "Unable to create DNS record"
+            }
     # elif action == "update_network":
     #     if result:
     #         module.exit_json(result)
