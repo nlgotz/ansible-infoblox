@@ -425,36 +425,83 @@ def main():
             result_json = {
                 'msg': "Unable to update fixed address"
             }
-    # elif action == "delete_network":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
-    # elif action == "delete_network_container":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
-    # elif action == "delete_range":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
-    # elif action == "delete_fixedaddress":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
-    # elif action == "delete_fixedaddress_by_mac":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
-    # elif action == "delete_dns_records":
-    #     if result:
-    #         module.exit_json(result)
-    #     else:
-    #         module.exit_json(msg="No member servers found")
+    elif action == "delete_network":
+        result = ib.delete_network(network)
+        if result:
+            result_json = {
+                'changed': True,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "Unable to delete network"
+            }
+    elif action == "delete_network_container":
+        result = ib.delete_network_container(network)
+        if result:
+            result_json = {
+                'changed': True,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "Unable to delete network container"
+            }
+    elif action == "delete_range":
+        result = ib.delete_range(start_addr, end_addr)
+        if result:
+            result_json = {
+                'changed': True,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "Unable to delete DHCP Range"
+            }
+    elif action == "delete_reservedaddress":
+        result = ib.delete_reservedaddress(address)
+        if result:
+            result_json = {
+                'changed': True,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "Unable to delete reserved address"
+            }
+    elif action == "delete_fixedaddress":
+        result = ib.delete_fixedaddress(ip_address)
+        if result:
+            result_json = {
+                'changed': True,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "Unable to delete fixed address"
+            }
+    elif action == "delete_fixedaddress_by_mac":
+        result = ib.delete_fixedaddress_by_mac(mac_address)
+        if result:
+            result_json = {
+                'changed': True,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "Unable to delete fixed address"
+            }
+    elif action == "delete_dns_records":
+        result = ib.delete_dns_records(fqdn)
+        if result:
+            result_json = {
+                'changed': True,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "Unable to delete DNS record"
+            }
     module.exit_json(**result_json)
 
 if __name__ == "__main__":
