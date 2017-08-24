@@ -51,7 +51,8 @@ def main():
             action=dict(required=True, choices=[
                 "get_memberservers", "get_dhcp_servers", "get_dhcpfailover",
                 "get_network", "get_network_by_ip", "get_network_by_comment",
-                "get_next_available_network", "get_network_container",
+                "get_next_available_network",
+                "get_next_available_address", "get_network_container",
                 "get_range", "get_dns_record", "get_similar_dns_records",
                 "get_fixedaddress", "get_fixedaddress_by_mac", "create_network",
                 "create_network_container", "create_range", "create_reservedaddress",
@@ -204,6 +205,17 @@ def main():
         else:
             result_json = {
                 'msg': "No next available network"
+            }
+    elif action == "get_next_available_address":
+        result = ib.get_next_available_network(network, num)
+        if result:
+            result_json = {
+                'changed': False,
+                'msg': result
+            }
+        else:
+            result_json = {
+                'msg': "No next available IP address"
             }
     elif action == "get_network_container":
         result = ib.get_network_container(network, fields)
