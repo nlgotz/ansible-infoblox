@@ -60,7 +60,8 @@ def main():
                 "update_network_container", "update_reservedaddress",
                 "update_fixedaddress_by_ip_addr",
                 "update_fixedaddress_mac_addr", "delete_network",
-                "delete_network_container", "delete_range", "delete_fixedaddress",
+                "delete_network_container", "delete_range",
+                "delete_reservedaddress", "delete_fixedaddress",
                 "delete_fixedaddress_by_mac", "delete_dns_records"
             ]),
             host=dict(required=False),
